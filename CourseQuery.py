@@ -92,15 +92,16 @@ class CourseQueryApp:
         self.log(">>> 开始初始化...")
         
         # Step 1
-        st_url = f"https://webvpnnew.jxau.edu.cn/https/77726476706e69737468656265737421f3f652d22d286945300d8db9d6562d/lyuapServer/v1/tickets/{tgt}?vpn-12-o2-cas.jxau.edu.cn"
+        # 请根据你的实际 WebVPN 地址修改以下 URL
+        st_url = f"https://webvpn.example.edu.cn/https/[encoded_cas_path]/lyuapServer/v1/tickets/{tgt}?vpn-params"
         headers_step1 = {
-            "Host": "webvpnnew.jxau.edu.cn",
+            "Host": "webvpn.example.edu.cn",
             "Connection": "keep-alive",
             "User-Agent": "Mozilla/5.0",
             "Content-Type": "application/x-www-form-urlencoded",
-            "Cookie": f"wengine_vpn_ticketwebvpnnew_jxau_edu_cn={wengine};"
+            "Cookie": f"wengine_vpn_ticket={wengine};"
         }
-        data_step1 = {"service": "https://jwgl.jxau.edu.cn/User/CheckTicketFromSSo", "loginToken": "loginToken"}
+        data_step1 = {"service": "https://jwgl.example.edu.cn/User/CheckTicketFromSSo", "loginToken": "loginToken"}
 
         fetched_ticket = None
         try:
@@ -121,7 +122,8 @@ class CourseQueryApp:
         self.log(f"验证 Ticket: {final_ticket}")
 
         # Step 2
-        check_url = f"https://webvpnnew.jxau.edu.cn/https/77726476706e69737468656265737421fae04690693a70516b468ca88d1b203b/User/CheckTicketFromSSo?ticket={final_ticket}"
+        # 请根据你的实际 WebVPN 地址修改以下 URL
+        check_url = f"https://webvpn.example.edu.cn/https/[encoded_jwgl_path]/User/CheckTicketFromSSo?ticket={final_ticket}"
         headers_step2 = headers_step1.copy()
         headers_step2["Sec-Fetch-Mode"] = "navigate"
         headers_step2.pop("Content-Type", None)
@@ -268,12 +270,13 @@ class CourseQueryApp:
             messagebox.showwarning("提示", "请先填写 UUID 和 Wengine")
             return
 
-        url = f"https://webvpnnew.jxau.edu.cn/https/77726476706e69737468656265737421fae04690693a70516b468ca88d1b203b/KcManage/GxKcManage/GetKcInfo/{uuid}?vpn-12-o2-jwgl.jxau.edu.cn"
+        # 请根据你的实际 WebVPN 地址修改以下 URL
+        url = f"https://webvpn.example.edu.cn/https/[encoded_path]/KcManage/GxKcManage/GetKcInfo/{uuid}?vpn-params"
         headers = {
-            "Host": "webvpnnew.jxau.edu.cn",
+            "Host": "webvpn.example.edu.cn",
             "User-Agent": "Mozilla/5.0",
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-            "Cookie": f"wengine_vpn_ticketwebvpnnew_jxau_edu_cn={wengine};"
+            "Cookie": f"wengine_vpn_ticket={wengine};"
         }
         data = {"start": "0", "limit": limit}
 
@@ -461,8 +464,9 @@ class CourseQueryApp:
     def fetch_score_data(self):
         uuid = self.score_uuid_entry.get()
         wengine = self.score_wengine_entry.get()
-        url = f"https://webvpnnew.jxau.edu.cn/https/77726476706e69737468656265737421fae04690693a70516b468ca88d1b203b/SystemManage/CJManage/GetXsCjByXh/{uuid}?vpn-12-o2-jwgl.jxau.edu.cn"
-        headers = {"Host":"webvpnnew.jxau.edu.cn", "Cookie":f"wengine_vpn_ticketwebvpnnew_jxau_edu_cn={wengine};", "User-Agent":"Mozilla/5.0"}
+        # 请根据你的实际 WebVPN 地址修改以下 URL
+        url = f"https://webvpn.example.edu.cn/https/[encoded_path]/SystemManage/CJManage/GetXsCjByXh/{uuid}?vpn-params"
+        headers = {"Host":"webvpn.example.edu.cn", "Cookie":f"wengine_vpn_ticket={wengine};", "User-Agent":"Mozilla/5.0"}
         
         def _run():
             try:
@@ -546,12 +550,13 @@ class CourseQueryApp:
         threading.Thread(target=self._run_batch_thread, args=(uuid, wengine), daemon=True).start()
 
     def _run_batch_thread(self, uuid, wengine):
-        url = f"https://webvpnnew.jxau.edu.cn/https/77726476706e69737468656265737421fae04690693a70516b468ca88d1b203b/KcManage/GxKcManage/XkInfo/{uuid}?vpn-12-o2-jwgl.jxau.edu.cn"
+        # 请根据你的实际 WebVPN 地址修改以下 URL
+        url = f"https://webvpn.example.edu.cn/https/[encoded_path]/KcManage/GxKcManage/XkInfo/{uuid}?vpn-params"
         headers = {
-            "Host": "webvpnnew.jxau.edu.cn",
+            "Host": "webvpn.example.edu.cn",
             "User-Agent": "Mozilla/5.0",
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-            "Cookie": f"wengine_vpn_ticketwebvpnnew_jxau_edu_cn={wengine};"
+            "Cookie": f"wengine_vpn_ticket={wengine};"
         }
 
         for i, item in enumerate(self.batch_list):

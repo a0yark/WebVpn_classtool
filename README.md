@@ -38,6 +38,19 @@
 
 ## 使用方法
 
+### 0. 配置 URL
+
+⚠️ **首次使用必读**
+
+由于不同学校的 WebVPN 系统地址不同，你需要先修改 `CourseQuery.py` 中的 URL：
+
+1. 打开 `CourseQuery.py` 文件
+2. 搜索 `webvpn.example.edu.cn` 和 `[encoded_path]`
+3. 替换为你学校的实际 WebVPN 地址和编码路径
+4. 修改 Cookie 名称（如果不同）
+
+参考 `config.example.py` 了解需要配置的内容。
+
 ### 1. 运行程序
 
 ```bash
@@ -75,11 +88,10 @@ python CourseQuery.py
 
 ### TGT 和 Wengine
 
-1. 使用浏览器登录 WebVPN 系统
+1. 使用浏览器登录你的 WebVPN 系统
 2. 打开开发者工具（F12）
 3. 切换到 Network 标签
-4. 在 Cookie 中找到：
-   - `wengine_vpn_ticketwebvpnnew_jxau_edu_cn` 的值即为 Wengine
+4. 在 Cookie 中找到 `wengine_vpn_ticket` 相关的值
 5. TGT 可从 CAS 认证请求中获取
 
 ## 注意事项
@@ -101,9 +113,9 @@ python CourseQuery.py
 
 ## 文件说明
 
-- `CourseQuery.py` - 主程序，包含完整的 GUI 和功能实现
+- `CourseQuery.py` - 主程序，包含完整的 GUI 和功能实现（需要根据你的学校配置 URL）
 - `send_packet.py` - 简单的课程查询请求示例
-- `send_request.py` - 预留的请求脚本
+- `config.example.py` - 配置示例文件，说明需要修改的配置项
 
 ## 免责声明
 
